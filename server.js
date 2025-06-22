@@ -1,4 +1,5 @@
 const express = require("express");
+app.options("/api/sendmail", cors());
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 require("dotenv").config();
@@ -8,15 +9,17 @@ const app = express();
 // CORS
 app.use(
   cors({
-    origin: "https://devjourney-nine.vercel.app",
+    origin: "https://devjourney-nine.vercel.app", // ไม่มี '/' ท้าย
     methods: ["POST", "OPTIONS"],
   })
 );
 
+// *** เพิ่มบรรทัดนี้ ***
+app.options("/api/sendmail", cors()); // สำหรับ preflight
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
