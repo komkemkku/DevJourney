@@ -1,34 +1,35 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
-require("dotenv").config(); // << ต้องเพิ่มบรรทัดนี้
+require("dotenv").config();
 
 const app = express();
 
+// CORS
 app.use(
   cors({
-    origin: "*", // Dev phase, เปิดทุก origin
+    origin: "https://devjourney-nine.vercel.app",
     methods: ["POST", "OPTIONS"],
   })
 );
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.EMAIL_USER, // ใช้จาก .env
-    pass: process.env.EMAIL_PASS, // ใช้จาก .env
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
 app.post("/api/sendmail", async (req, res) => {
   const { name, email, phone, type, budget, detail } = req.body;
   const mailOptions = {
-    from: `"No-Reply [ เริ่มต้น Dev ]" <${process.env.EMAIL_USER}>`,
-    to: "devj.contact@gmail.com",
+    from: `"No-Reply [เริ่มต้น Dev]" <${process.env.EMAIL_USER}>`,
+    to: process.env.EMAIL_RECEIVER || "devj.contact@gmail.com",
     subject: `ติดต่องาน - ${name ? name : "ลูกค้าใหม่"}`,
     text: `
 [แจ้งจากเว็บไซต์ เริ่มต้น Dev]
@@ -38,10 +39,10 @@ app.post("/api/sendmail", async (req, res) => {
 ประเภทเว็บไซต์: ${type || "-"}
 งบประมาณโดยประมาณ: ${budget || "-"}
 รายละเอียดเพิ่มเติม: ${detail || "-"}
-    `,
+    `.trim(),
   };
   try {
-    let info = await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     res.json({ success: true, message: "ส่งอีเมลเรียบร้อยแล้ว" });
   } catch (err) {
     res.status(500).json({
@@ -52,6 +53,7 @@ app.post("/api/sendmail", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("Server started on http://localhost:3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server started on http://localhost:${PORT}`);
 });
