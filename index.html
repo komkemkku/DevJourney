@@ -283,7 +283,7 @@
         <div class="section-title">ผลงานของเรา</div>
         <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
             <div class="col">
-                <div class="portfolio-card text-center">
+                <div class="portfolio-card text-center" style="cursor:pointer" onclick="showPortfolioModal('corporate')">
                     <div class="portfolio-icon"><i class="bi bi-building"></i></div>
                     <div class="fw-bold mb-1">เว็บไซต์บริษัท</div>
                     <div class="text-muted" style="font-size:1rem;">
@@ -292,7 +292,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="portfolio-card text-center">
+                <div class="portfolio-card text-center" style="cursor:pointer" onclick="showPortfolioModal('shop')">
                     <div class="portfolio-icon"><i class="bi bi-cart4"></i></div>
                     <div class="fw-bold mb-1">ร้านค้าออนไลน์</div>
                     <div class="text-muted" style="font-size:1rem;">
@@ -301,7 +301,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="portfolio-card text-center">
+                <div class="portfolio-card text-center" style="cursor:pointer" onclick="showPortfolioModal('landing')">
                     <div class="portfolio-icon"><i class="bi bi-megaphone"></i></div>
                     <div class="fw-bold mb-1">Landing Page</div>
                     <div class="text-muted" style="font-size:1rem;">
@@ -387,6 +387,20 @@
     <footer class="footer">
         &copy; 2025 เริ่มต้น Dev
     </footer>
+    <!-- Portfolio Modal -->
+    <div class="modal fade" id="portfolioModal" tabindex="-1" aria-labelledby="portfolioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="portfolioModalLabel">รายละเอียดผลงาน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="portfolioModalBody">
+                    <!-- เนื้อหาผลงานจะถูกเติมโดย JS -->
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -488,6 +502,70 @@
                 document.getElementById("visitor-stats").innerHTML = "ไม่สามารถโหลดจำนวนผู้เข้าชม";
             }
         })();
+
+        function showPortfolioModal(type) {
+            const modalTitle = document.getElementById('portfolioModalLabel');
+            const modalBody = document.getElementById('portfolioModalBody');
+            let title = '';
+            let html = '';
+
+            if (type === 'corporate') {
+                title = 'เว็บไซต์บริษัท';
+                html = `
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="img-fluid rounded mb-3" alt="corporate site">
+                </div>
+                <div class="col-md-6">
+                    <h6>ตัวอย่าง:</h6>
+                    <ul>
+                        <li>บริษัท ABC จำกัด - เว็บองค์กรทันสมัย</li>
+                        <li>บริษัท XYZ Group - เว็บแนะนำบริการ</li>
+                    </ul>
+                    <p class="mt-2 text-muted">เหมาะสำหรับองค์กรที่ต้องการภาพลักษณ์มืออาชีพ รองรับมือถือ SEO ดี</p>
+                </div>
+            </div>
+        `;
+            } else if (type === 'shop') {
+                title = 'ร้านค้าออนไลน์';
+                html = `
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="/image/PhakramCraft.png" class="img-fluid rounded mb-3" alt="shop site">
+                </div>
+                <div class="col-md-6">
+                    <h6>PhakramCraft : </h6>
+                    <ul>
+                        <li>ร้านค้า phakramcraft - ระบบตะกร้า/ชำระเงิน</li>
+                        <li>ร้านผ้าครามออนไลน์ - กดถูกใจสินค้า</li>
+                    </ul>
+                    <p class="mt-2 text-muted">เหมาะสำหรับธุรกิจขายของออนไลน์ รองรับการชำระเงินหลายช่องทาง</p>
+                </div>
+            </div>
+        `;
+            } else if (type === 'landing') {
+                title = 'Landing Page';
+                html = `
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="/image/corelink.png" class="img-fluid rounded mb-3" alt="landing page">
+                </div>
+                <div class="col-md-6">
+                    <h6>Corelink Digital : </h6>
+                    <ul>
+                        <li>ให้คำปรึกษาและพัฒนาเว็บไซต์ แอปพลิเคชัน และการตลาดออนไลน์ครบวงจร</li>
+                    </ul>
+                    <p class="mt-2 text-muted">เหมาะสำหรับพัฒนาเว็บไซต์ แอปพลิเคชัน และการตลาดออนไลน์ครบวงจร</p>
+                </div>
+            </div>
+        `;
+            }
+
+            modalTitle.textContent = title;
+            modalBody.innerHTML = html;
+            const modal = new bootstrap.Modal(document.getElementById('portfolioModal'));
+            modal.show();
+        }
     </script>
 </body>
 
