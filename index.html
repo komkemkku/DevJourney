@@ -476,31 +476,17 @@
             }
         };
 
-        // --- Visitor Counter ---
+        // --- Visitor Counter (เรียก backend ตัวเอง) ---
         (async function () {
-            const ns = "devj-2025";
-            const todayKey = ns + "-today-" + new Date().toISOString().slice(0, 10);
-            const weekKey = ns + "-week-" + (() => {
-                const d = new Date();
-                d.setDate(d.getDate() - d.getDay());
-                return d.toISOString().slice(0, 10);
-            })();
-            const totalKey = ns + "-total";
-
-            // เพิ่ม counter
-            await fetch(`https://api.countapi.xyz/hit/${ns}/${totalKey}`);
-            await fetch(`https://api.countapi.xyz/hit/${ns}/${todayKey}`);
-            await fetch(`https://api.countapi.xyz/hit/${ns}/${weekKey}`);
-
-            // ดึงค่าทั้งหมด
-            const [total, today, week] = await Promise.all([
-                fetch(`https://api.countapi.xyz/get/${ns}/${totalKey}`).then(r => r.json()),
-                fetch(`https://api.countapi.xyz/get/${ns}/${todayKey}`).then(r => r.json()),
-                fetch(`https://api.countapi.xyz/get/${ns}/${weekKey}`).then(r => r.json())
-            ]);
-
-            document.getElementById("visitor-stats").innerHTML =
-                `เข้าชมสะสม <b>${total.value.toLocaleString()}</b> | สัปดาห์นี้ <b>${week.value.toLocaleString()}</b> | วันนี้ <b>${today.value.toLocaleString()}</b>`;
+            try {
+                await fetch("/api/hit", { method: "POST" });
+                const res = await fetch("/api/counter");
+                const data = await res.json();
+                document.getElementById("visitor-stats").innerHTML =
+                    `เข้าชมสะสม <b>${data.total.toLocaleString()}</b> | สัปดาห์นี้ <b>${data.week.toLocaleString()}</b> | วันนี้ <b>${data.today.toLocaleString()}</b>`;
+            } catch {
+                document.getElementById("visitor-stats").innerHTML = "ไม่สามารถโหลดจำนวนผู้เข้าชม";
+            }
         })();
     </script>
 </body>
