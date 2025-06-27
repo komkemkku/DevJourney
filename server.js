@@ -21,7 +21,7 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// สำหรับ preflight OPTIONS (เพื่อความชัวร์)
+// สำหรับ preflight OPTIONS
 app.options("/api/sendmail", cors());
 
 // Nodemailer config
