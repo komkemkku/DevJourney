@@ -513,38 +513,7 @@
             if (type === 'corporate') {
                 title = 'เว็บไซต์บริษัท';
                 html = `
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="img-fluid rounded mb-3" alt="corporate site">
-                </div>
-                <div class="col-md-6">
-                    <h6>ตัวอย่าง:</h6>
-                    <ul>
-                        <li>บริษัท ABC จำกัด - เว็บองค์กรทันสมัย</li>
-                        <li>บริษัท XYZ Group - เว็บแนะนำบริการ</li>
-                    </ul>
-                    <p class="mt-2 text-muted">เหมาะสำหรับองค์กรที่ต้องการภาพลักษณ์มืออาชีพ รองรับมือถือ SEO ดี</p>
-                </div>
-            </div>
-        `;
-            } else if (type === 'shop') {
-                title = 'ร้านค้าออนไลน์';
-                html = `
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <img src="/image/PhakramCraft.png" class="img-fluid rounded mb-3" alt="shop site">
-                </div>
-                <div class="col-md-6">
-                    <h6>PhakramCraft : </h6>
-                    <ul>
-                        <li>ร้านค้า phakramcraft - ระบบตะกร้า/ชำระเงิน</li>
-                        <li>ร้านผ้าครามออนไลน์ - กดถูกใจสินค้า</li>
-                    </ul>
-                    <p class="mt-2 text-muted">เหมาะสำหรับธุรกิจขายของออนไลน์ รองรับการชำระเงินหลายช่องทาง</p>
-                </div>
-            </div>
-
-            <div class="row g-4">
+               <div class="row g-4">
                 <div class="col-md-6">
                     <img src="/image/classplus.png" class="img-fluid rounded mb-3" alt="shop site">
                 </div>
@@ -576,6 +545,23 @@
                 </div>
             </div>
         `;
+            } else if (type === 'shop') {
+                title = 'ร้านค้าออนไลน์';
+                html = `
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="/image/PhakramCraft.png" class="img-fluid rounded mb-3" alt="shop site">
+                </div>
+                <div class="col-md-6">
+                    <h6>PhakramCraft : </h6>
+                    <ul>
+                        <li>ร้านค้า phakramcraft - ระบบตะกร้า/ชำระเงิน</li>
+                        <li>ร้านผ้าครามออนไลน์ - กดถูกใจสินค้า</li>
+                    </ul>
+                    <p class="mt-2 text-muted">เหมาะสำหรับธุรกิจขายของออนไลน์ รองรับการชำระเงินหลายช่องทาง</p>
+                </div>
+            </div>
+        `;
             } else if (type === 'landing') {
                 title = 'Landing Page';
                 html = `
@@ -589,6 +575,19 @@
                         <li>ให้คำปรึกษาและพัฒนาเว็บไซต์ แอปพลิเคชัน และการตลาดออนไลน์ครบวงจร</li>
                     </ul>
                     <p class="mt-2 text-muted">เหมาะสำหรับพัฒนาเว็บไซต์ แอปพลิเคชัน และการตลาดออนไลน์ครบวงจร</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <img src="/image/Baker Me.png" class="img-fluid rounded mb-3" alt="landing page">
+                </div>
+                <div class="col-md-6">
+                    <h6>Baker Me : </h6>
+                    <ul>
+                        <li>ระบบนำเสนอสินค้าและการขายสินค้า</li>
+                    </ul>
+                    <p class="mt-2 text-muted">เหมาะสำหรับร้านคาเฟ่ ร้านเค้ก ขนาดเล็กที่ต้องการสื่อสารสินค้าให้กับลูกค้า</p>
                 </div>
             </div>
         `;
