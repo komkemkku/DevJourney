@@ -247,7 +247,12 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">เริ่มต้น Dev</a>
+            <div>
+                <a class="navbar-brand" href="#">เริ่มต้น Dev</a>
+                <div id="visitor-stats" style="font-size:0.98rem; color:#1678c2; margin-top:-2px;">
+                    <span>กำลังโหลดจำนวนผู้เข้าชม...</span>
+                </div>
+            </div>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -470,6 +475,33 @@
                 });
             }
         };
+
+        // --- Visitor Counter ---
+        (async function () {
+            const ns = "devj-2025";
+            const todayKey = ns + "-today-" + new Date().toISOString().slice(0, 10);
+            const weekKey = ns + "-week-" + (() => {
+                const d = new Date();
+                d.setDate(d.getDate() - d.getDay());
+                return d.toISOString().slice(0, 10);
+            })();
+            const totalKey = ns + "-total";
+
+            // เพิ่ม counter
+            await fetch(`https://api.countapi.xyz/hit/${ns}/${totalKey}`);
+            await fetch(`https://api.countapi.xyz/hit/${ns}/${todayKey}`);
+            await fetch(`https://api.countapi.xyz/hit/${ns}/${weekKey}`);
+
+            // ดึงค่าทั้งหมด
+            const [total, today, week] = await Promise.all([
+                fetch(`https://api.countapi.xyz/get/${ns}/${totalKey}`).then(r => r.json()),
+                fetch(`https://api.countapi.xyz/get/${ns}/${todayKey}`).then(r => r.json()),
+                fetch(`https://api.countapi.xyz/get/${ns}/${weekKey}`).then(r => r.json())
+            ]);
+
+            document.getElementById("visitor-stats").innerHTML =
+                `เข้าชมสะสม <b>${total.value.toLocaleString()}</b> | สัปดาห์นี้ <b>${week.value.toLocaleString()}</b> | วันนี้ <b>${today.value.toLocaleString()}</b>`;
+        })();
     </script>
 </body>
 
