@@ -479,8 +479,8 @@
         // --- Visitor Counter (เรียก backend ตัวเอง) ---
         (async function () {
             try {
-                await fetch("/api/hit", { method: "POST" });
-                const res = await fetch("/api/counter");
+                await fetch("https://devjourney-production.up.railway.app/api/hit", { method: "POST" });
+                const res = await fetch("https://devjourney-production.up.railway.app/api/counter");
                 const data = await res.json();
                 document.getElementById("visitor-stats").innerHTML =
                     `เข้าชมสะสม <b>${data.total.toLocaleString()}</b> | สัปดาห์นี้ <b>${data.week.toLocaleString()}</b> | วันนี้ <b>${data.today.toLocaleString()}</b>`;
