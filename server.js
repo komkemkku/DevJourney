@@ -12,7 +12,7 @@ const COUNTER_FILE = path.join(__dirname, "counter.json");
 // ใช้ CORS ให้เสร็จทีเดียว
 app.use(
   cors({
-    origin: "https://devjourney-nine.vercel.app",
+    origin: "https://devjourney-app.vercel.app",
     methods: ["POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
@@ -146,5 +146,5 @@ app.get("/api/counter", async (req, res) => {
 // Railway/Vercel ต้องใช้ process.env.PORT
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
+  console.log(`Server started on ${PORT}`);
 });
