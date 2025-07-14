@@ -1,5 +1,6 @@
 // ใช้ in-memory storage (ข้อมูลจะหายเมื่อ function restart)
 // ในการใช้งานจริงควรใช้ Vercel KV, Redis, หรือ database
+// Updated for Vercel deployment
 
 let counter = { total: 0, today: {}, week: {} };
 
