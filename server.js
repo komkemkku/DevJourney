@@ -12,7 +12,7 @@ const COUNTER_FILE = path.join(__dirname, "counter.json");
 // ใช้ CORS ให้เสร็จทีเดียว
 app.use(
   cors({
-    origin: "https://devjourney-app.vercel.app",
+    origin: "https://dev-journey-app.vercel.app",
     methods: ["POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
   })
