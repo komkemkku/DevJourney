@@ -1,8 +1,8 @@
 // Simple test endpoint for Vercel Functions
-module.exports = (req, res) => {
+export default function handler(req, res) {
   res.status(200).json({ 
     message: "Hello from Vercel API!", 
     timestamp: new Date().toISOString(),
     method: req.method 
   });
-};
+}

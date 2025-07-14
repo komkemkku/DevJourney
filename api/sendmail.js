@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 // Nodemailer config
 const transporter = nodemailer.createTransporter({
@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransporter({
   },
 });
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://dev-journey-app.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -59,4 +59,4 @@ module.exports = async (req, res) => {
       error: err.toString(),
     });
   }
-};
+}
