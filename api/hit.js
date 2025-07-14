@@ -4,7 +4,7 @@
 
 let counter = { total: 0, today: {}, week: {} };
 
-module.exports = async (req, res) => {
+export default function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://dev-journey-app.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -51,5 +51,5 @@ module.exports = async (req, res) => {
     if ((new Date() - new Date(week)) / 864e5 > 21) delete counter.week[week];
   });
 
-  res.json({ success: true });
-};
+  res.status(200).json({ success: true });
+}

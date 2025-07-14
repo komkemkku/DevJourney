@@ -4,7 +4,7 @@
 
 let counter = { total: 0, today: {}, week: {} };
 
-module.exports = async (req, res) => {
+export default function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://dev-journey-app.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -27,9 +27,9 @@ module.exports = async (req, res) => {
     return d.toISOString().slice(0, 10);
   })();
 
-  res.json({
+  res.status(200).json({
     total: counter.total || 0,
     today: Object.keys(counter.today[todayStr] || {}).length,
     week: Object.keys(counter.week[weekStr] || {}).length,
   });
-};
+}

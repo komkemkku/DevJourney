@@ -1,5 +1,4 @@
-const nodemailer = require("nodemailer");
-require("dotenv").config();
+import nodemailer from "nodemailer";
 
 // Nodemailer config
 const transporter = nodemailer.createTransporter({
@@ -10,7 +9,7 @@ const transporter = nodemailer.createTransporter({
   },
 });
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://dev-journey-app.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -51,7 +50,7 @@ module.exports = async (req, res) => {
 
   try {
     await transporter.sendMail(mailOptions);
-    res.json({ success: true, message: "ส่งอีเมลเรียบร้อยแล้ว" });
+    res.status(200).json({ success: true, message: "ส่งอีเมลเรียบร้อยแล้ว" });
   } catch (err) {
     console.error("Mail error:", err);
     res.status(500).json({
@@ -60,4 +59,4 @@ module.exports = async (req, res) => {
       error: err.toString(),
     });
   }
-};
+}
