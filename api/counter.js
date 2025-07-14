@@ -4,7 +4,7 @@
 
 let counter = { total: 0, today: {}, week: {} };
 
-export default function handler(req, res) {
+module.exports = (req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://dev-journey-app.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -32,4 +32,4 @@ export default function handler(req, res) {
     today: Object.keys(counter.today[todayStr] || {}).length,
     week: Object.keys(counter.week[weekStr] || {}).length,
   });
-}
+};
